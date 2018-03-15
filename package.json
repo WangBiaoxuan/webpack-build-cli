@@ -1,0 +1,36 @@
+{
+  "name": "webpack-build-cli",
+  "version": "1.0.0",
+  "description": "webpack cli",
+  "bin": {
+    "webpack-build-cli": "./bin/webpack-build-cli"
+  },
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "chalk": "^2.3.2",
+    "commander": "^2.15.0",
+    "css-loader": "^0.28.10",
+    "file-loader": "^1.1.11",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf lib && babel src --out-dir lib"
+  },
+  "keywords": [
+    "webpack",
+    "cli"
+  ],
+  "author": "geek",
+  "license": "ISC"
+}
