@@ -1,3 +1,6 @@
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 export default function loaders(args, webpackConfig) {
   return {
     ...webpackConfig,
@@ -7,7 +10,6 @@ export default function loaders(args, webpackConfig) {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
-          /*
           options: {
             cacheDirectory: true,
             presets: [
@@ -19,11 +21,10 @@ export default function loaders(args, webpackConfig) {
               require.resolve('babel-plugin-transform-decorators-legacy'),
             ],
           }
-          */
         },
         {
           test: /\.html$/,
-          loader: 'file-loader',
+          loader: 'html-loader',
         },
         {
           test: /\.(jpg|jpeg|png|gif|svg)$/,
@@ -34,25 +35,36 @@ export default function loaders(args, webpackConfig) {
         },
         {
           test: /\.less$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            'less-loader'
-          ]
+          use: ExtractTextPlugin.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                  include: /node_modules/
+                }
+              },
+              {
+                loader: 'less-loader',
+                options: {
+                  modules: true,
+                  include: /node_modules/
+                }
+              }
+            ]
+          })
         },
         {
           test: /\.css$/,
-          use: [
-            {
-              loader: 'style-loader', 
-            },
-            {
+          use: ExtractTextPlugin.extract({
+            use: {
               loader: 'css-loader',
               options: {
                 modules: true,
+                include: /node_modules/
               }
             }
-          ]
+          })
         }
       ]
     },

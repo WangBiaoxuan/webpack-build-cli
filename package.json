@@ -7,14 +7,25 @@
   },
   "dependencies": {
     "babel-loader": "^7.1.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "chalk": "^2.3.2",
     "commander": "^2.15.0",
     "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.0.6",
     "less-loader": "^4.1.0",
+    "memory-fs": "^0.4.1",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-dev-server": "^1.16.4",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -24,8 +35,8 @@
     "babel-preset-stage-1": "^6.24.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf lib && babel src --out-dir lib"
+    "build": "rm -rf lib && babel src --out-dir lib",
+    "test": "cnpm run build && sudo cnpm install . -g"
   },
   "keywords": [
     "webpack",
