@@ -1,5 +1,7 @@
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const path = require('path');
 
 export default function loaders(args, webpackConfig) {
   return {
@@ -13,12 +15,10 @@ export default function loaders(args, webpackConfig) {
           options: {
             cacheDirectory: true,
             presets: [
-              require.resolve('babel-preset-react'),
-              require.resolve('babel-preset-stage-0'),
+              
             ],
             plugins: [
-              require.resolve('babel-plugin-add-module-exports'),
-              require.resolve('babel-plugin-transform-decorators-legacy'),
+              
             ],
           }
         },
@@ -35,37 +35,93 @@ export default function loaders(args, webpackConfig) {
         },
         {
           test: /\.less$/,
+          include: /node_modules/,
           use: ExtractTextPlugin.extract({
             use: [
               {
                 loader: 'css-loader',
                 options: {
-                  modules: true,
-                  include: /node_modules/
-                }
+                  sourceMap: true,
+                },
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: [
+                    autoprefixer({
+                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                    }),
+                  ],
+                },
               },
               {
                 loader: 'less-loader',
                 options: {
-                  modules: true,
-                  include: /node_modules/
-                }
-              }
+                  sourceMap: true,
+                },
+              },
             ]
-          })
+          }),
+        },
+        {
+          test: /\.less$/,
+          include: /src|public/,
+          use: ExtractTextPlugin.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                  modules: true,
+                },
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: [
+                    autoprefixer({
+                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                    }),
+                  ],
+                },
+              },
+              {
+                loader: 'less-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ]
+          }),
         },
         {
           test: /\.css$/,
+          include: /node_modules|src|public/,
           use: ExtractTextPlugin.extract({
-            use: {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                include: /node_modules/
-              }
-            }
-          })
-        }
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                  modules: true
+                },
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: [
+                    autoprefixer({
+                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                    }),
+                  ],
+                },
+              },
+            ],
+          }),
+        },
       ]
     },
   }

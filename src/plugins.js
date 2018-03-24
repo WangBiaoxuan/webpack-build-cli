@@ -14,6 +14,9 @@ export default function entry(args, webpackConfig) {
         name: 'common',
         filename: '[name].[chunkhash:8].js',
       }),
+      new ExtractTextPlugin({
+        filename: '[name]-[chunkhash].css'
+      }), 
       new HtmlWebpackPlugin({
         inject: true,
         favicon: 'src/favicon.ico',
@@ -41,10 +44,7 @@ export default function entry(args, webpackConfig) {
         } else if (percentage === 1) {
           console.log(chalk.green('\nwebpack: bundle build is now finished.'));
         }
-      }),
-      new ExtractTextPlugin({
-        filename: '[name]-[chunkhash].css'
-      }),
+      }),  
       new Visualizer(),
     ]
   }

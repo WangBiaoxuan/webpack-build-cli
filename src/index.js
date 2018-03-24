@@ -32,7 +32,7 @@ export default function index(args, callback) {
   if (typeof file === 'function') {
     webpackConfig = file(webpackConfig)
   }
-  console.log(webpackConfig)
+  console.log('webpackConfig build cli:', webpackConfig)
 
   // 编译
   const compiler = webpack(webpackConfig)
