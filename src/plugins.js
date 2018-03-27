@@ -7,15 +7,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 export default function entry(args, webpackConfig) {
+  const isDev = !args.isProd;
   return {
     ...webpackConfig,
     plugins: [
+      new webpack.HotModuleReplacementPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'common',
-        filename: '[name].[chunkhash:8].js',
+        filename: `[name].${isDev ? '' : '[chunkhash:8]'}.js`,
       }),
       new ExtractTextPlugin({
-        filename: '[name]-[chunkhash].css'
+        filename: `[name]-${isDev ? '' : '[chunkhash:8]'}.css`
       }), 
       new HtmlWebpackPlugin({
         inject: true,

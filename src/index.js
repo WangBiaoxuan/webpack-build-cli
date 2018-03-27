@@ -34,23 +34,29 @@ export default function index(args, callback) {
   }
   console.log('webpackConfig build cli:', webpackConfig)
 
-  // 编译
-  const compiler = webpack(webpackConfig)
-
   /*
   compiler.run((err, stats) => {
     console.log('err', err)
     // console.log(stats)
   }) 
   */
-
   
   const devServerOptions = Object.assign({}, {
     contentBase: path.join(args.cwd, "dist"),
+    hot: true,
+    stats: "minimal",
+    host: "localhost",
+    // socket: 'socket'
   });
+
+  WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerOptions);
+
+  // 编译
+  const compiler = webpack(webpackConfig)
+
   const server = new WebpackDevServer(compiler, devServerOptions);
 
-  server.listen(8080, '127.0.0.1', () => {
+  server.listen(8080, 'localhost', () => {
     console.log('Starting server on http://localhost:8080');
   });
   
