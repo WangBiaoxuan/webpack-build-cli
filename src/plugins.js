@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin');
 
 
 export default function entry(args, webpackConfig) {
@@ -36,6 +37,30 @@ export default function entry(args, webpackConfig) {
           minifyCSS: true,
           minifyURLs: true,
         },
+      }),
+      new AutoDllPlugin({
+        inject: true, // will inject the DLL bundles to index.html
+        filename: '[name]_[hash].js',
+        entry: {
+          vendor: [
+            'echarts',
+            'lodash',
+            'bluebird',
+            'jsbarcode',
+            'antd',
+            'react-router',
+            'redux-saga',
+            'isomorphic-fetch',
+            'react',
+            'react-dom',
+            'react-redux',
+            'redux',
+            'dva',
+            'history',
+            'core-js',
+            'redux-logger'
+          ]
+        }
       }),
       new webpack.ProgressPlugin((percentage, msg, addInfo) => {
         const stream = process.stderr;

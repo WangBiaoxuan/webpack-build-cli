@@ -1,6 +1,10 @@
 const webpack = require('webpack');
 const path = require('path')
 const WebpackDevServer = require('webpack-dev-server')
+const devMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const express = require('express');
+const app = express();
 
 import entryFun  from './entry'
 import outputFun  from './output'
@@ -33,13 +37,6 @@ export default function index(args, callback) {
     webpackConfig = file(webpackConfig)
   }
   console.log('webpackConfig build cli:', webpackConfig)
-
-  /*
-  compiler.run((err, stats) => {
-    console.log('err', err)
-    // console.log(stats)
-  }) 
-  */
   
   const devServerOptions = Object.assign({}, {
     contentBase: path.join(args.cwd, "dist"),
@@ -49,15 +46,19 @@ export default function index(args, callback) {
     // socket: 'socket'
   });
 
-  WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerOptions);
+  // WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerOptions);
 
   // 编译
   const compiler = webpack(webpackConfig)
 
-  const server = new WebpackDevServer(compiler, devServerOptions);
+  app.use(devMiddleware(compiler, {
+    logTime: true,
+    publicPath: webpackConfig.output.publicPath,
+    stats: "minimal",
+  }));
 
-  server.listen(8080, 'localhost', () => {
-    console.log('Starting server on http://localhost:8080');
-  });
+  app.use(webpackHotMiddleware(compiler));
+
+  app.listen(8080, () => console.log('Example app listening on port 3000!'))
   
 }

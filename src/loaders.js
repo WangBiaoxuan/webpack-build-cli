@@ -50,7 +50,7 @@ export default function loaders(args, webpackConfig) {
                   sourceMap: true,
                   plugins: [
                     autoprefixer({
-                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                      browsers: ['last 2 versions'],
                     }),
                   ],
                 },
@@ -82,7 +82,7 @@ export default function loaders(args, webpackConfig) {
                   sourceMap: true,
                   plugins: [
                     autoprefixer({
-                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                      browsers: ['last 2 versions'],
                     }),
                   ],
                 },
@@ -114,7 +114,7 @@ export default function loaders(args, webpackConfig) {
                   sourceMap: true,
                   plugins: [
                     autoprefixer({
-                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                      browsers: ['last 2 versions'],
                     }),
                   ],
                 },
