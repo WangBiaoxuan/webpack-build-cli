@@ -1,6 +1,7 @@
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const HappyPack = require('happypack');
 const path = require('path');
 
 export default function loaders(args, webpackConfig) {
@@ -11,6 +12,8 @@ export default function loaders(args, webpackConfig) {
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
+          use: 'happypack/loader?id=js'
+          /*
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
@@ -21,6 +24,7 @@ export default function loaders(args, webpackConfig) {
               
             ],
           }
+          */
         },
         {
           test: /\.html$/,
@@ -37,6 +41,8 @@ export default function loaders(args, webpackConfig) {
           test: /\.less$/,
           include: /node_modules/,
           use: ExtractTextPlugin.extract({
+            use: 'happypack/loader?id=less_1',
+            /*
             use: [
               {
                 loader: 'css-loader',
@@ -62,12 +68,15 @@ export default function loaders(args, webpackConfig) {
                 },
               },
             ]
+            */
           }),
         },
         {
           test: /\.less$/,
           include: /src|public/,
           use: ExtractTextPlugin.extract({
+            use: 'happypack/loader?id=less_2',
+            /*
             use: [
               {
                 loader: 'css-loader',
@@ -94,12 +103,15 @@ export default function loaders(args, webpackConfig) {
                 },
               },
             ]
+            */
           }),
         },
         {
           test: /\.css$/,
           include: /node_modules|src|public/,
           use: ExtractTextPlugin.extract({
+            use: 'happypack/loader?id=css',
+            /*
             use: [
               {
                 loader: 'css-loader',
@@ -120,6 +132,7 @@ export default function loaders(args, webpackConfig) {
                 },
               },
             ],
+            */
           }),
         },
       ]

@@ -41,7 +41,7 @@ export default function index(args, callback) {
   const devServerOptions = Object.assign({}, {
     contentBase: path.join(args.cwd, "dist"),
     hot: true,
-    stats: "minimal",
+    // stats: "minimal",
     host: "localhost",
     // socket: 'socket'
   });
@@ -54,7 +54,31 @@ export default function index(args, callback) {
   app.use(devMiddleware(compiler, {
     logTime: true,
     publicPath: webpackConfig.output.publicPath,
-    stats: "minimal",
+    stats: {
+      assets: false,
+      cachedAssets: false,
+      assets: false,
+      // 对资源按指定的字段进行排序
+      // 你可以使用 `!field` 来反转排序。
+      assetsSort: "field",
+      // 添加缓存（但未构建）模块的信息
+      cached: false,
+      // 显示缓存的资源（将其设置为 `false` 则仅显示输出的文件）
+      cachedAssets: false,
+      // 添加 children 信息
+      children: false,
+      // 添加 chunk 信息（设置为 `false` 能允许较少的冗长输出）
+      chunks: false,
+      // 将构建模块信息添加到 chunk 信息
+      chunkModules: false,
+      // 添加 chunk 和 chunk merge 来源的信息
+      chunkOrigins: false,
+      publicPath: false,
+      // 添加模块被引入的原因
+      reasons: false,
+      // 添加模块的源码
+      source: false,
+    },
   }));
 
   app.use(webpackHotMiddleware(compiler));
