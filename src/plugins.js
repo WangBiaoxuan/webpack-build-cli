@@ -88,7 +88,7 @@ export default function entry(args, webpackConfig) {
       createHappyPlugin('less_2', ['css-loader?modules=true!less-loader']),
       createHappyPlugin('css', ['css-loader?modules=true']),
       createHappyPlugin('js', ['babel-loader?cacheDirectory=true']),
-      new Visualizer(),
+      // new Visualizer(),
     ]
   }
 }

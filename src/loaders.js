@@ -73,7 +73,8 @@ export default function loaders(args, webpackConfig) {
         },
         {
           test: /\.less$/,
-          include: /src|public/,
+          exclude: /node_modules/,
+          // include: /src|public/,
           use: ExtractTextPlugin.extract({
             use: 'happypack/loader?id=less_2',
             /*
@@ -108,7 +109,7 @@ export default function loaders(args, webpackConfig) {
         },
         {
           test: /\.css$/,
-          include: /node_modules|src|public/,
+          // include: /node_modules/,
           use: ExtractTextPlugin.extract({
             use: 'happypack/loader?id=css',
             /*
