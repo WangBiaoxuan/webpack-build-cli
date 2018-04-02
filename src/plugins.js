@@ -6,7 +6,8 @@ const Visualizer = require('webpack-visualizer-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const HappyPack = require('happypack');
-const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 
 function createHappyPlugin(id, loaders) {
@@ -14,7 +15,7 @@ function createHappyPlugin(id, loaders) {
     id: id,
     loaders: loaders,
     threadPool: happyThreadPool,
-    verbose: false,
+    verbose: true,
     cache: true,
   });
 }
