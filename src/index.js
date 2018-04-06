@@ -1,7 +1,6 @@
 import chokidar from 'chokidar';
 const webpack = require('webpack');
 const path = require('path')
-const WebpackDevServer = require('webpack-dev-server')
 const devMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const express = require('express');
@@ -37,8 +36,10 @@ export default function index(args, callback) {
     webpackConfig = file(webpackConfig)
   }
   console.log('webpackConfig build cli:', webpackConfig)
+  console.log('webpackConfig.output.publicPath:', webpackConfig.output.publicPath)
   if (args.watch) {
     const compiler = webpack(webpackConfig);
+    app.use('/assets', express.static(path.join(webpackConfig.output.path, 'assets')))
     app.use(devMiddleware(compiler, {
       logTime: true,
       publicPath: webpackConfig.output.publicPath,

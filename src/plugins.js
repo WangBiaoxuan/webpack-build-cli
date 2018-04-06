@@ -59,7 +59,7 @@ export default function plugins(args, webpackConfig) {
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
-      },
+      }
     }),
     new AutoDllPlugin({
       inject: true, // will inject the DLL bundles to index.html

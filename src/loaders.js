@@ -26,11 +26,11 @@ export default function loaders(args, webpackConfig) {
         ],
       }
       */
-    },
+    }, 
     {
       test: /\.html$/,
       loader: 'html-loader',
-    },
+    }, 
     {
       test: /\.(jpg|jpeg|png|gif|svg)$/,
       loader: 'url-loader', 

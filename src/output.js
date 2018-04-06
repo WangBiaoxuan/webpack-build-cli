@@ -7,6 +7,7 @@ export default function output(args, webpackConfig) {
       path: path.join(process.cwd(), './dist/'),
       filename: `[name].${isDev ? '' : '[chunkhash:8]'}.js`,
       chunkFilename: `[name].${isDev ? '' : '[chunkhash:8]'}.js`,
+      publicPath: args.publicPath || '/'
     }
   }
 }
