@@ -8,7 +8,7 @@ export default function loaders(args, webpackConfig) {
   webpackConfig.module = {
     noParse: '/node_modules/'
   }
-  webpackConfig.module.rules = webpackConfig.module.loaders = [];
+  webpackConfig.module.rules = [];
   webpackConfig.module.rules.push(
     {
       test: /\.jsx?$/,

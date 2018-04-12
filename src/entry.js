@@ -3,7 +3,8 @@ export default function entry(args, webpackConfig) {
     index: ['./src/index.js']
   }
   if (args.watch) {
-    webpackConfig.entry.index.push('webpack-hot-middleware/client?path=/__webpack_hmr')
+    webpackConfig.entry.index.push('webpack-hot-middleware/client?path=/__webpack_hmr');
+    webpackConfig.mode = 'development';
   }
   return webpackConfig
 }

@@ -26,10 +26,12 @@ export default function plugins(args, webpackConfig) {
     isDev = true;
   }
   webpackConfig.plugins = [
+    /*
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
       filename: `[name].${isDev ? '' : '[chunkhash:8]'}.js`,
     }),
+    */
     new ExtractTextPlugin({
       filename: `[name]-${isDev ? '' : '[chunkhash:8]'}.css`
     }), 
@@ -61,6 +63,7 @@ export default function plugins(args, webpackConfig) {
         minifyURLs: true,
       }
     }),
+    /*
     new AutoDllPlugin({
       inject: true, // will inject the DLL bundles to index.html
       filename: '[name]_[hash].js',
@@ -85,6 +88,7 @@ export default function plugins(args, webpackConfig) {
         ]
       }
     }),
+    */
     createHappyPlugin('less_1', ['css-loader!less-loader']),
     createHappyPlugin('less_2', ['css-loader?modules=true!less-loader']),
     createHappyPlugin('css', ['css-loader?modules=true']),
