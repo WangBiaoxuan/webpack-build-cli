@@ -41,9 +41,9 @@ export default function loaders(args, webpackConfig) {
     {
       test: /\.less$/,
       include: /node_modules/,
+      use: 'happypack/loader?id=less_1',
+      /*
       use: ExtractTextPlugin.extract({
-        use: 'happypack/loader?id=less_1',
-        /*
         use: [
           {
             loader: 'css-loader',
@@ -69,16 +69,18 @@ export default function loaders(args, webpackConfig) {
             },
           },
         ]
-        */
       }),
+       */
     },
     {
       test: /\.less$/,
       exclude: /node_modules/,
       // include: /src|public/,
+      use: 'happypack/loader?id=less_2',
+      /*
       use: ExtractTextPlugin.extract({
         use: 'happypack/loader?id=less_2',
-        /*
+        
         use: [
           {
             loader: 'css-loader',
@@ -104,16 +106,18 @@ export default function loaders(args, webpackConfig) {
               sourceMap: true,
             },
           },
-        ]
-        */
+        ] 
       }),
+      */
     },
     {
       test: /\.css$/,
       // include: /node_modules/,
+      use: 'happypack/loader?id=css',
+      /*
       use: ExtractTextPlugin.extract({
         use: 'happypack/loader?id=css',
-        /*
+        
         use: [
           {
             loader: 'css-loader',
@@ -133,9 +137,9 @@ export default function loaders(args, webpackConfig) {
               ],
             },
           },
-        ],
-        */
+        ],   
       }),
+      */
     },
   )
   return webpackConfig

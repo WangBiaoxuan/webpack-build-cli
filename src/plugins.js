@@ -32,9 +32,9 @@ export default function plugins(args, webpackConfig) {
       filename: `[name].${isDev ? '' : '[chunkhash:8]'}.js`,
     }),
     */
-    new ExtractTextPlugin({
-      filename: `[name]-${isDev ? '' : '[chunkhash:8]'}.css`
-    }), 
+    // new ExtractTextPlugin({
+    //   filename: `[name]-${isDev ? '' : '[chunkhash:8]'}.css`
+    // }), 
     new webpack.ProgressPlugin((percentage, msg, addInfo) => {
       const stream = process.stderr;
       if (stream.isTTY && percentage < 0.71) {
